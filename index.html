@@ -16,6 +16,16 @@
       .shower {
         --slide-ratio: calc(16 / 9);
       }
+      table.link-queue thead tr {
+          border: solid 1px gray;
+      }
+      table.link-queue thead td {
+          font-weight: bold;
+          background-color: white;
+      }
+      table.link-queue tbody tr {
+          border: solid 1px gray;
+      }
     </style>
   </head>
 
@@ -106,16 +116,130 @@
       </ul>
     </section>
 	
-    <section id="some-slide" class="slide" inlist="" rel="schema:hasPart" resource="#some-slide">
-      <h2 property="schema:name">TODO: A regular slide</h2>
-      <ul>
-          <li>
-          	  <h3>A</h3>
-			  <span class="indent">TODO: Description</span>
-          </li>
-          <li>B</li>
-          <li>C</li>
-      </ul>
+    <section id="example-decentralized-data" class="slide" inlist="" rel="schema:hasPart" resource="#example-decentralized-data">
+      <h2 property="schema:name">Example: decentralized address book</h2>
+      <center><img src="img/pods.svg" width="75%" /></center>
+    </section>
+    
+    <section id="example-query" class="slide" inlist="" rel="schema:hasPart" resource="#example-query">
+      <h2 property="schema:name">Example: Find Alice's contact names</h2>
+        <img src="img/pods.svg" width="35%" style="float: right" />
+        <pre>SELECT ?name WHERE {
+    &lt;https://alice.pods.org/profile#me&gt;
+        foaf:knows ?person.
+    ?person foaf:name ?name.
+}</pre>
+        <h3>Query process:</h3>
+		<ol>
+			<li>Start from Alice's profile</li>
+            <li>Follow links to profiles of Bob and Carol</li>
+            <li>Query over union of all profiles</li>
+            <li>Find query results: <code>[ { "name": "Bob" }, { "name": "Carol" } ]</code></li>
+		</ol>
+    </section>
+    
+    <section id="link-traversal-process" class="slide" inlist="" rel="schema:hasPart" resource="#link-traversal-process">
+        <h2 property="schema:name">The Link Traversal Query Process</h2>
+        <em><strong>Link queue</strong>: stores links to documents that need to be fetched</em>
+		<ul>
+			<li>
+                <h3>1. Initialize link queue with <em>seed URLs</em></h3>
+                <span class="indent">Seed URLs can be user-defined, or derived from query</span>
+			</li>
+			<li>
+                <h3>2. Iterate and append link queue</h3>
+                <span class="indent">Iteratively pop head off queue, and follow link to document</span><br /><br />
+                <span class="indent">Add all URLs in document to link queue</span>
+			</li>
+			<li>
+                <h3>3. Execute query</h3>
+                <span class="indent">Over union of all discovered RDF triples</span>
+			</li>
+		</ul>
+    </section>
+    
+    <section id="example-link-queue-evolution-1" class="slide" inlist="" rel="schema:hasPart" resource="#example-link-queue-evolution-1">
+        <h2 property="schema:name">Example: Evolution of the Link Queue</h2>
+        <h3>Initialize link queue with seed URL(s)</h3>
+        <table class="link-queue">
+            <tr><td>https://alice.pods.org/profile</td></tr>
+        </table>
+    </section>
+    
+    <section id="example-link-queue-evolution-2" class="slide" inlist="" rel="schema:hasPart" resource="#example-link-queue-evolution-2">
+        <h2 property="schema:name">Example: Evolution of the Link Queue</h2>
+        <h3>Follow link to head of queue</h3>
+        <table class="link-queue">
+            <thead><tr><td>https://alice.pods.org/profile</td></tr></thead>
+        </table>
+    </section>
+    
+    <section id="example-link-queue-evolution-3" class="slide" inlist="" rel="schema:hasPart" resource="#example-link-queue-evolution-3">
+        <h2 property="schema:name">Example: Evolution of the Link Queue</h2>
+        <h3>Push URLs in <code>https://alice.pods.org/profile</code> to queue</h3>
+        <table class="link-queue">
+            <thead><tr><td>https://alice.pods.org/profile</td></tr></thead>
+            <tr><td>https://bob.pods.org/profile</td></tr>
+            <tr><td>https://carol.org/</td></tr>
+        </table>
+    </section>
+    
+    <section id="example-link-queue-evolution-4" class="slide" inlist="" rel="schema:hasPart" resource="#example-link-queue-evolution-4">
+        <h2 property="schema:name">Example: Evolution of the Link Queue</h2>
+        <h3>Remove handled link from queue</h3>
+        <table class="link-queue">
+            <tr><td>https://bob.pods.org/profile</td></tr>
+            <tr><td>https://carol.org/</td></tr>
+        </table>
+    </section>
+    
+    <section id="example-link-queue-evolution-5" class="slide" inlist="" rel="schema:hasPart" resource="#example-link-queue-evolution-5">
+        <h2 property="schema:name">Example: Evolution of the Link Queue</h2>
+        <h3>Follow link to head of queue</h3>
+        <table class="link-queue">
+            <thead><tr><td>https://bob.pods.org/profile</td></tr></thead>
+            <tr><td>https://carol.org/</td></tr>
+        </table>
+    </section>
+    
+    <section id="example-link-queue-evolution-6" class="slide" inlist="" rel="schema:hasPart" resource="#example-link-queue-evolution-6">
+        <h2 property="schema:name">Example: Evolution of the Link Queue</h2>
+        <h3>No more URLs found in <code>https://bob.pods.org/profile</code></h3>
+        <table class="link-queue">
+            <thead><tr><td>https://bob.pods.org/profile</td></tr></thead>
+            <tr><td>https://carol.org/</td></tr>
+        </table>
+    </section>
+    
+    <section id="example-link-queue-evolution-7" class="slide" inlist="" rel="schema:hasPart" resource="#example-link-queue-evolution-7">
+        <h2 property="schema:name">Example: Evolution of the Link Queue</h2>
+        <h3>Remove handled link from queue</h3>
+        <table class="link-queue">
+            <tr><td>https://carol.org/</td></tr>
+        </table>
+    </section>
+    
+    <section id="example-link-queue-evolution-8" class="slide" inlist="" rel="schema:hasPart" resource="#example-link-queue-evolution-8">
+        <h2 property="schema:name">Example: Evolution of the Link Queue</h2>
+        <h3>Follow link to head of queue</h3>
+        <table class="link-queue">
+            <thead><tr><td>https://carol.org/</td></tr></thead>
+        </table>
+    </section>
+    
+    <section id="example-link-queue-evolution-9" class="slide" inlist="" rel="schema:hasPart" resource="#example-link-queue-evolution-9">
+        <h2 property="schema:name">Example: Evolution of the Link Queue</h2>
+        <h3>No more URLs found in <code>https://carol.org/</code></h3>
+        <table class="link-queue">
+            <thead><tr><td>https://carol.org/</td></tr></thead>
+        </table>
+    </section>
+    
+    <section id="example-link-queue-evolution-10" class="slide" inlist="" rel="schema:hasPart" resource="#example-link-queue-evolution-10">
+        <h2 property="schema:name">Example: Evolution of the Link Queue</h2>
+        <h3>Remove handled link from queue</h3>
+        <em>Link queue is empty</em>
+        <h3 class="next">Execute query over union of all discovered RDF triples<h3>
     </section>
     
     <section id="index-optimizations" class="slide index" inlist="" rel="schema:hasPart" resource="#index-optimizations">
