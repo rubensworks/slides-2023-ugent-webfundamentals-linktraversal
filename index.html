@@ -261,6 +261,91 @@
       </ul>
     </section>
     
+    <section id="optimizations" class="slide" inlist="" rel="schema:hasPart" resource="#optimizations">
+        <h2 property="schema:name">Link Traversal has practical problems</h2>
+        <em>But solutions exist!</em>
+		<ul>
+			<li>
+                <h3>Link queue rarely becomes empty</h3>
+                <span class="indent">It grows in size due to massive size of the Web</span><br /><br />
+                <span class="indent">Query process never has a chance to start!</span>
+			</li>
+			<li>
+                <h3>Existing query planning algorithms don't work</h3>
+                <span class="indent">There is no a priori knowledge about cardinalities and other statistics</span>
+			</li>
+			<li>
+                <h3>Too many links are followed</h3>
+                <span class="indent">Each document typically contains many links &rarr; exponential growth</span>
+			</li>
+		</ul>
+    </section>
+    
+    <section id="iterator-pipeline" class="slide" inlist="" rel="schema:hasPart" resource="#iterator-pipeline">
+        <h2 property="schema:name">Process query during link queue handling</h2>
+        <img src="img/pipeline.svg" width="33%" style="float: right" />
+        <h3>&rarr; Cope with infinitely growing link queues</h3>
+		<ul>
+			<li>
+                <h3>Extension of <em>pipelining</em> approach</h3>
+                <span class="indent">Link queue is a component in pipeline</span><br /><br />
+                <span class="indent">May produce an infinite data stream</span>
+			</li>
+		</ul>
+    </section>
+    
+    <section id="query-planning" class="slide" inlist="" rel="schema:hasPart" resource="#query-planning">
+        <h2 property="schema:name">Zero-knowledge query planning</h2>
+        <h3>Score-based heuristics for determining triple pattern order in BGPs</h3>
+		<ul>
+			<li>
+                <h3>Selectivity</h3>
+                <span class="indent">Triple patterns with fewer variables are prioritized</span>
+			</li>
+			<li>
+                <h3>Seed-based</h3>
+                <span class="indent">Triple patterns that contain a seed URL are prioritized</span>
+			</li>
+			<li>
+                <h3>No ontologies</h3>
+                <span class="indent">Triple patterns for well-known ontologies (e.g. <code>rdf:type</code>) are deprioritized</span><br />
+                <span class="indent">These often produce <em>many</em> results</span>
+			</li>
+		</ul>
+    </section>
+    
+    <section id="reachability" class="slide" inlist="" rel="schema:hasPart" resource="#reachability">
+        <h2 property="schema:name">Pre-filter links before they enter queue</h2>
+        <em>Different filtering strategies exist</em>
+		<ul>
+			<li>
+                <h3>Follow all</h3>
+                <span class="indent">No filtering, follow all possible links</span>
+			</li>
+			<li>
+                <h3>Follow none</h3>
+                <span class="indent">Follow no links</span>
+			</li>
+			<li>
+                <h3>Follow if triple matches query</h3>
+                <span class="indent">Follow links in a triple if they match at least one triple pattern in the query</span>
+			</li>
+		</ul>
+    </section>
+    
+    <section id="reachability-cmatch" class="slide" inlist="" rel="schema:hasPart" resource="#reachability-cmatch">
+        <h2 property="schema:name">Follow if triple matches query: example</h2>
+        <pre>SELECT ?name WHERE {
+    &lt;https://alice.pods.org/profile#me&gt; foaf:knows ?person.
+    ?person foaf:name ?name.
+}</pre>
+        <br />
+        Contents of <code>https://alice.pods.org/profile</code>:
+        <pre style="border: solid 1px black; padding: 15px; font-size: 0.9em">✅ &lt;/profile#me&gt; :knows &lt;https://bob.pods.org/profile#me&gt;.
+✅ &lt;/profile#me&gt; :knows &lt;https://carol.org/#i&gt;.
+❌ &lt;/profile#me&gt; :likes &lt;https://bob.pods.org/posts/hello-world&gt;.</pre>
+    </section>
+    
     <section id="index-problems" class="slide index" inlist="" rel="schema:hasPart" resource="#index-problems">
       <ul>
         <li><a href="#index-process">Query process</a></li>
