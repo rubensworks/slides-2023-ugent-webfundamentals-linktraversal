@@ -354,6 +354,63 @@
       </ul>
     </section>
     
+    <section id="problem-slow" class="slide" inlist="" rel="schema:hasPart" resource="#problem-slow">
+        <h2 property="schema:name">Slow query execution</h2>
+		<ul>
+			<li>
+                <h3>Large number of links to follow</h3>
+                <span class="indent">Fetching all documents in the Web is not practical</span>
+			</li>
+			<li>
+                <h3>Following links is expensive</h3>
+                <span class="indent">Setting up many TCP connections for doing HTTP requests takes time</span>
+			</li>
+			<li>
+                <h3>No indexing</h3>
+                <span class="indent">Query planning is based on heuristics</span>
+			</li>
+		</ul>
+    </section>
+    
+    <section id="problem-termination" class="slide" inlist="" rel="schema:hasPart" resource="#problem-termination">
+        <h2 property="schema:name">Query never terminates</h2>
+		<ul>
+			<li>
+                <h3>Large number of links to follow</h3>
+                <span class="indent">New content is produced faster than you can follow links</span>
+			</li>
+			<li>
+                <h3>Attempts to solve this by prioritizing links in queue</h3>
+                <span class="indent">For example, depth-first search, breadth-first search, page rank, ...</span><br />
+                <span class="indent">Only reduces time to first result, not total execution time</span>
+			</li>
+			<li>
+                <h3>Better solutions are needed</h3>
+                <span class="indent">Data publishers could point to query-relevant documents</span>
+			</li>
+		</ul>
+    </section>
+    
+    <section id="problem-security" class="slide" inlist="" rel="schema:hasPart" resource="#problem-security">
+        <h2 property="schema:name">Potential security issues</h2>
+		<ul>
+			<li>
+                <h3>People can make unauthorized statements</h3>
+                <span class="indent">Web is open &rarr; anyone can say anything</span><br /><br />
+                <span class="indent">Example: Carol gives a faulty name to Bob.</span>
+			</li>
+			<li>
+                <h3>System hogging</h3>
+                <span class="indent">Malicious publishers could link to documents that are expensive to process</span><br /><br />
+                <span class="indent">Example: huge files, documents with syntax errors, ...</span>
+			</li>
+			<li>
+                <h3>Session Hijacking</h3>
+                <span class="indent">Sessions for authentication may be leaked to other domains</span>
+			</li>
+		</ul>
+    </section>
+    
     <section id="index-final" class="slide index" inlist="" rel="schema:hasPart" resource="#index-final">
       <ul>
         <li><a href="#index-process">Query process</a></li>
