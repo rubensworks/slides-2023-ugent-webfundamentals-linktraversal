@@ -44,6 +44,7 @@
 
     <section id="title" class="slide title" inlist="" rel="schema:hasPart" resource="#title">
       <h2 property="schema:name">Link Traversal-based<br />Query Processing</h2>
+      <h3>Query execution by following links between documents</h2>
       <ul class="author inline">
           <li class="current"><a href="https://www.rubensworks.net/">Ruben Taelman</a></li>
       </ul>
@@ -271,12 +272,12 @@
                 <span class="indent">Query process never has a chance to start!</span>
 			</li>
 			<li>
-                <h3>Existing query planning algorithms don't work</h3>
-                <span class="indent">There is no a priori knowledge about cardinalities and other statistics</span>
-			</li>
-			<li>
                 <h3>Too many links are followed</h3>
                 <span class="indent">Each document typically contains many links &rarr; exponential growth</span>
+			</li>
+			<li>
+                <h3>Existing query planning algorithms don't work</h3>
+                <span class="indent">There is no a priori knowledge about cardinalities and other statistics</span>
 			</li>
 		</ul>
     </section>
@@ -290,26 +291,6 @@
                 <h3>Extension of <em>pipelining</em> approach</h3>
                 <span class="indent">Link queue is a component in pipeline</span><br /><br />
                 <span class="indent">May produce an infinite data stream</span>
-			</li>
-		</ul>
-    </section>
-    
-    <section id="query-planning" class="slide" inlist="" rel="schema:hasPart" resource="#query-planning">
-        <h2 property="schema:name">Zero-knowledge query planning</h2>
-        <h3>Score-based heuristics for determining triple pattern order in BGPs</h3>
-		<ul>
-			<li>
-                <h3>Selectivity</h3>
-                <span class="indent">Triple patterns with fewer variables are prioritized</span>
-			</li>
-			<li>
-                <h3>Seed-based</h3>
-                <span class="indent">Triple patterns that contain a seed URL are prioritized</span>
-			</li>
-			<li>
-                <h3>No ontologies</h3>
-                <span class="indent">Triple patterns for well-known ontologies (e.g. <code>rdf:type</code>) are deprioritized</span><br />
-                <span class="indent">These often produce <em>many</em> results</span>
 			</li>
 		</ul>
     </section>
@@ -344,6 +325,26 @@
         <pre style="border: solid 1px black; padding: 15px; font-size: 0.9em">✅ &lt;/profile#me&gt; :knows &lt;https://bob.pods.org/profile#me&gt;.
 ✅ &lt;/profile#me&gt; :knows &lt;https://carol.org/#i&gt;.
 ❌ &lt;/profile#me&gt; :likes &lt;https://bob.pods.org/posts/hello-world&gt;.</pre>
+    </section>
+    
+    <section id="query-planning" class="slide" inlist="" rel="schema:hasPart" resource="#query-planning">
+        <h2 property="schema:name">Zero-knowledge query planning</h2>
+        <h3>Score-based heuristics for determining triple pattern order in BGPs</h3>
+		<ul>
+			<li>
+                <h3>Selectivity</h3>
+                <span class="indent">Triple patterns with fewer variables are prioritized</span>
+			</li>
+			<li>
+                <h3>Seed-based</h3>
+                <span class="indent">Triple patterns that contain a seed URL are prioritized</span>
+			</li>
+			<li>
+                <h3>No ontologies</h3>
+                <span class="indent">Triple patterns for well-known ontologies (e.g. <code>rdf:type</code>) are deprioritized</span><br />
+                <span class="indent">These often produce <em>many</em> results</span>
+			</li>
+		</ul>
     </section>
     
     <section id="index-problems" class="slide index" inlist="" rel="schema:hasPart" resource="#index-problems">
