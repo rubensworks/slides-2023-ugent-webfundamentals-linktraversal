@@ -327,6 +327,25 @@
 ❌ &lt;/profile#me&gt; :likes &lt;https://bob.pods.org/posts/hello-world&gt;.</pre>
     </section>
     
+    <section id="reachability-semantics" class="slide" inlist="" rel="schema:hasPart" resource="#reachability-semantics">
+        <h2 property="schema:name">Filtering links and query semantics</h2>
+		<ul>
+			<li>
+                <h3>SPARQL queries have universal meaning</h3>
+                <span class="indent">Queries can be executed over all (RDF) datasets</span>
+			</li>
+			<li>
+                <h3>Query results depend on datasets</h3>
+                <span class="indent">Executing same query over different datasets may produce different results</span>
+			</li>
+			<li>
+                <h3>Different link filtering strategies leads to different range of documents</h3>
+                <span class="indent">Query results may differ for different strategies</span><br /><br />
+                <span class="indent">Results also depend on the seed URLs</span>
+			</li>
+		</ul>
+    </section>
+    
     <section id="query-planning" class="slide" inlist="" rel="schema:hasPart" resource="#query-planning">
         <h2 property="schema:name">Zero-knowledge query planning</h2>
         <h3>Score-based heuristics for determining triple pattern order in BGPs</h3>
