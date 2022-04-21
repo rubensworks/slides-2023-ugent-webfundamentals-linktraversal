@@ -1,7 +1,7 @@
-# Slides for Web Fundamentals course 2021 on Introduction to Link Traversal-based Query Processing
-[![Build Status](https://github.com/rubensworks/slides-2021-ugent-webfundamentals-linktraversal/workflows/Build%20and%20Deploy/badge.svg)](https://rubensworks.github.io/slides-2021-ugent-webfundamentals-linktraversal/)
+# Slides for Web Fundamentals course 2022 on Introduction to Link Traversal-based Query Processing
+[![Build Status](https://github.com/rubensworks/slides-2022-ugent-webfundamentals-linktraversal/workflows/Build%20and%20Deploy/badge.svg)](https://rubensworks.github.io/slides-2022-ugent-webfundamentals-linktraversal/)
 
-**Live version: https://rubensworks.github.io/slides-2021-ugent-webfundamentals-linktraversal/**
+**Live version: https://rubensworks.github.io/slides-2022-ugent-webfundamentals-linktraversal/**
 
 These slides are created using the [shower](https://github.com/shower/shower) framework.
 
